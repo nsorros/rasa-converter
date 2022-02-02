@@ -38,3 +38,18 @@ rasa-convert PATH_TO_RASA_DATA data.spacy --format spacy
 spacy init config config.cfg --pipeline ner
 spacy train config.cfg --paths.train data.spacy --paths.dev data.spacy
 ```
+
+# ⚙️ Contribute
+
+You need to setup a development environment with all dependencies. You
+also probably want to install the package in editable mode.
+
+```
+python -m venv venv
+source venv/bin/activate
+
+git clone https://www.github.com/nsorros/rasa-converter
+pip install -e .[spacy,test]
+```
+
+To run tests run `pytest`
