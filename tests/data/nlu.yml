@@ -1,0 +1,21 @@
+nlu:
+  - intent: hello
+    examples: |
+      - hello
+      - hi
+      - hey
+  - intent: how_are_you
+    examples: |
+      - how are you?
+      - how are you [Nick](name)?
+      - how is your day [Matt](name)?
+  - intent: name
+    examples: |
+      - what is your name?
+      - can you remind me your name?
+      - you said you name was?
+  - intent: address
+    examples: |
+     - where do you live?
+     - do you also live in [Greece](country)
+     - did you say you are located in [Cyprus](country)

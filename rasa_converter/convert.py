@@ -27,6 +27,7 @@ def yield_data(input_path):
     nlus = glob.glob(input_path + "/**/nlu.yml", recursive=True)
     
     for nlu in nlus:
+        print(f"Processing {nlu}")
         with open(nlu) as f:
             nlu_data = yaml.safe_load(f)
 
@@ -38,6 +39,8 @@ def yield_data(input_path):
             # Split multiline string |
             examples = intent_data["examples"].split("\n")
             for example in examples:
+                if not example: # skip empty line
+                    continue
                 text = example[2:] # skip "- "
                 text, entities = extract_entities(text)
                 yield {"text": text, "intent": intent_data["intent"], "entities": entities}
