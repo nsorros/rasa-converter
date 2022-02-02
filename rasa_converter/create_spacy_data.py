@@ -10,14 +10,12 @@ def convert_to_spacy(examples):
     for example in examples:
         doc = nlp(example["text"])
 
-        for ent in example["entities"]:
-            span = doc.char_span(ent["start_char"], ent["end_char"], label=ent["label"])
-
-            doc.ents = [
-                doc.char_span(ent["start_char"], ent["end_char"], label=ent["label"], alignment_mode="expand")
-                for ent in example["entities"]
-            ]
-            doc_bin.add(doc)
+        doc.ents = [
+            doc.char_span(ent["start_char"], ent["end_char"], label=ent["label"], alignment_mode="expand")
+            for ent in example["entities"]
+        ]
+        doc.cats[example["intent"]] = 1.0
+        doc_bin.add(doc)
     return doc_bin
 
 def create_spacy_data(data_path, spacy_data_path):
