@@ -1,0 +1,13 @@
+# Venv
+venv
+
+# Python
+**/__pycache__/
+*.egg-info
+
+# Data
+*.jsonl
+*.spacy
+
+# Examples
+config.cfg
