@@ -52,4 +52,4 @@ git clone https://www.github.com/nsorros/rasa-converter
 pip install -e .[spacy,test]
 ```
 
-To run tests run `pytest`
+To run tests run `pytest` or even better `tox`

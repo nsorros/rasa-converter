@@ -4,7 +4,7 @@ import os
 from spacy.tokens import DocBin
 import spacy
 
-from convert import convert
+from rasa_converter.convert import convert
 
 
 def read_jsonl(data_path):

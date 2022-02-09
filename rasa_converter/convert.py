@@ -52,7 +52,7 @@ def convert(input_path, output_path, format="jsonl"):
            for item in yield_data(input_path):
                 f.write(json.dumps(item)+"\n")
     elif format == "spacy":
-        from create_spacy_data import convert_to_spacy
+        from rasa_converter.create_spacy_data import convert_to_spacy
 
         data = list(yield_data(input_path))
         spacy_data = convert_to_spacy(data)
