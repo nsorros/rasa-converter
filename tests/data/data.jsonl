@@ -1,0 +1,12 @@
+{"text": "hello", "intent": "hello", "entities": []}
+{"text": "hi", "intent": "hello", "entities": []}
+{"text": "hey", "intent": "hello", "entities": []}
+{"text": "how are you?", "intent": "how_are_you", "entities": []}
+{"text": "how are you Nick?", "intent": "how_are_you", "entities": [{"start_char": 12, "end_char": 16, "label": "name", "text": "Nick"}]}
+{"text": "how is your day Matt?", "intent": "how_are_you", "entities": [{"start_char": 16, "end_char": 20, "label": "name", "text": "Matt"}]}
+{"text": "what is your name?", "intent": "name", "entities": []}
+{"text": "can you remind me your name?", "intent": "name", "entities": []}
+{"text": "you said you name was?", "intent": "name", "entities": []}
+{"text": "where do you live?", "intent": "address", "entities": []}
+{"text": "do you also live in Greece", "intent": "address", "entities": [{"start_char": 20, "end_char": 26, "label": "country", "text": "Greece"}]}
+{"text": "did you say you are located in Cyprus", "intent": "address", "entities": [{"start_char": 31, "end_char": 37, "label": "country", "text": "Cyprus"}]}

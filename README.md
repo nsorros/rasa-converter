@@ -25,7 +25,7 @@ python -m venv venv
 source venv/bin/activate
 
 git clone https://www.github.com/nsorros/rasa-converter
-pip install .[spacy]
+pip install .[spacy,sklearn]
 ```
 
 # ▶️ Quickstart
@@ -38,6 +38,16 @@ rasa-convert PATH_TO_RASA_DATA data.spacy --format spacy
 spacy init config config.cfg --pipeline ner
 spacy train config.cfg --paths.train data.spacy --paths.dev data.spacy
 ```
+
+Train an sklearn model using Rasa data
+```
+rasa-convert PATH_TO_RASA_DATA data.jsonl
+
+sklearn train data.jsonl
+```
+Note that we provide a convenient cli sklearn entrypoint
+that trains a tfidf-svm model. You can write your own training
+loop to experiment with different models.
 
 # ⚙️ Contribute
 
