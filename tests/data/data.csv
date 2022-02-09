@@ -1,0 +1,13 @@
+text,intent
+hello,hello
+hi,hello
+hey,hello
+how are you?,how_are_you
+how are you Nick?,how_are_you
+how is your day Matt?,how_are_you
+what is your name?,name
+can you remind me your name?,name
+you said you name was?,name
+where do you live?,address
+do you also live in Greece,address
+did you say you are located in Cyprus,address
