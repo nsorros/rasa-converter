@@ -34,16 +34,18 @@ Train a spacy model using Rasa data
 
 ```
 rasa-convert PATH_TO_RASA_DATA data.spacy --format spacy
+split data.spacy train_data.spacy test_data.spacy
 
-spacy init config config.cfg --pipeline ner
+spacy init config config.cfg --pipeline textcat,ner # ner if data have entities
 spacy train config.cfg --paths.train data.spacy --paths.dev data.spacy
 ```
 
 Train an sklearn model using Rasa data
 ```
 rasa-convert PATH_TO_RASA_DATA data.jsonl
+split data.jsonl train_data.jsonl test_data.jsonl
 
-sklearn train data.jsonl
+sklearn data.jsonl
 ```
 Note that we provide a convenient cli sklearn entrypoint
 that trains a tfidf-svm model. You can write your own training
@@ -59,7 +61,7 @@ python -m venv venv
 source venv/bin/activate
 
 git clone https://www.github.com/nsorros/rasa-converter
-pip install -e .[spacy,test]
+pip install -e .[spacy,sklearn,test]
 ```
 
 To run tests run `pytest` or even better `tox`
