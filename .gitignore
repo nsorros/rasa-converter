@@ -15,6 +15,7 @@ dist
 # Data
 *.jsonl
 *.spacy
+*.csv
 
 # Examples
 config.cfg

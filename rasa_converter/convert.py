@@ -2,6 +2,7 @@ import glob
 import yaml
 import typer
 import json
+import csv
 import re
 
 
@@ -57,6 +58,16 @@ def convert(input_path, output_path, format="jsonl"):
         data = list(yield_data(input_path))
         spacy_data = convert_to_spacy(data)
         spacy_data.to_disk(output_path)
+    elif format == "csv":
+        with open(output_path, "w") as f:
+            fieldnames = ["text", "intent"]
+            csvwriter = csv.DictWriter(f, fieldnames=fieldnames)
+            
+            csvwriter.writeheader()
+            for item in yield_data(input_path):
+                item.pop("entities")
+                csvwriter.writerow(item)
+        
     else:
         print(f"format {format} not recognised") 
 
