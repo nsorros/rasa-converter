@@ -43,7 +43,6 @@ spacy train config.cfg --paths.train data.spacy --paths.dev data.spacy
 Train an sklearn model using Rasa data
 ```
 rasa-convert PATH_TO_RASA_DATA data.jsonl
-split data.jsonl train_data.jsonl test_data.jsonl
 
 sklearn data.jsonl
 ```
