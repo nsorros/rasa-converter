@@ -25,6 +25,7 @@ python -m venv venv
 source venv/bin/activate
 
 git clone https://www.github.com/nsorros/rasa-converter
+cd rasa_converter
 pip install .[spacy,sklearn]
 ```
 
@@ -34,7 +35,7 @@ Train a spacy model using Rasa data
 
 ```
 rasa-convert PATH_TO_RASA_DATA data.spacy --format spacy
-split data.spacy train_data.spacy test_data.spacy
+split-data data.spacy train_data.spacy test_data.spacy
 
 spacy init config config.cfg --pipeline textcat,ner # ner if data have entities
 spacy train config.cfg --paths.train data.spacy --paths.dev data.spacy
@@ -60,6 +61,7 @@ python -m venv venv
 source venv/bin/activate
 
 git clone https://www.github.com/nsorros/rasa-converter
+cd rasa_converter
 pip install -e .[spacy,sklearn,test]
 ```
 
