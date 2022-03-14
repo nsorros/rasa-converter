@@ -8,20 +8,18 @@ import re
 
 app = typer.Typer()
 
+
 def extract_entities(text):
     entities = []
 
-    match = re.search(r"\[[a-zA-Z ]+\]\(\w+\)", text)
-    while match:
+    for match in re.finditer(r"\[([a-zA-Z ]+)\]\((\w+)\)", text):
         start_char, end_char = match.span()
-        match_text = text[start_char:end_char]
+        match_text = match.group(0)
 
-        pattern = re.compile(r"\[([a-zA-Z ]+)\]\((\w+)\)")
-        entity_text, entity_label = pattern.findall(match_text)[0]
+        entity_text, entity_label = match.group(1), match.group(2)
 
-        text = text.replace(text[start_char:end_char], entity_text)
+        text = text.replace(match_text, entity_text)
         entities.append({"start_char": start_char, "end_char": start_char+len(entity_text), "label": entity_label, "text": entity_text})
-        match = re.search(r"\[[a-zA-Z ]+\]\(\w+\)", text)
     return text, entities
 
 def yield_data(input_path):
