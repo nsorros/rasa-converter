@@ -4,6 +4,7 @@ import typer
 import json
 import csv
 import re
+import os
 
 
 app = typer.Typer()
@@ -25,7 +26,14 @@ def extract_entities(text):
     return text, entities
 
 def yield_data(input_path):
-    nlus = glob.glob(input_path + "/**/nlu.yml", recursive=True)
+    if os.path.isdir(input_path):
+        nlus = glob.glob(os.path.join(input_path, "**", "nlu.yml"), recursive=True)
+    else:
+        if "nlu.yml" in input_path:
+            nlus = [input_path]
+        else:
+            print(f"{input_path} not named nlu.yml. skipping.")
+            nlus = []
     
     for nlu in nlus:
         print(f"Processing {nlu}")
