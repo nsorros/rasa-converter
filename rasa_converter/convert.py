@@ -3,6 +3,7 @@ import yaml
 import typer
 import json
 import csv
+import ast
 import re
 
 
@@ -12,11 +13,24 @@ app = typer.Typer()
 def extract_entities(text):
     entities = []
 
+    # [entity-text](entity-label)
     for match in re.finditer(r"\[([a-zA-Z ]+)\]\((\w+)\)", text):
         start_char, end_char = match.span()
         match_text = match.group(0)
 
         entity_text, entity_label = match.group(1), match.group(2)
+
+        text = text.replace(match_text, entity_text)
+        entities.append({"start_char": start_char, "end_char": start_char+len(entity_text), "label": entity_label, "text": entity_text})
+    
+    # [entity-text]{entity-dict}
+    for match in re.finditer(r"\[([a-zA-Z ]+)\](\{[a-z\:\", ]+\})", text):
+        start_char, end_char = match.span()
+        match_text = match.group(0)
+
+        entity_text = match.group(1)
+        entity_data = ast.literal_eval(match.group(2))
+        entity_label = entity_data["entity"]
 
         text = text.replace(match_text, entity_text)
         entities.append({"start_char": start_char, "end_char": start_char+len(entity_text), "label": entity_label, "text": entity_text})
