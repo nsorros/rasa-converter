@@ -12,15 +12,15 @@ def extract_entities(text):
     entities = []
 
     # note this finds the first match
-    match = re.search(r"\[\w+\]\(\w+\)", text)
+    match = re.search(r"\[[a-zA-Z ]+\]\(\w+\)", text)
     if match:
         start_char, end_char = match.span()
         match_text = text[start_char:end_char]
 
-        pattern = re.compile(r"\[(\w+)\]\((\w+)\)")
+        pattern = re.compile(r"\[([a-zA-Z ]+)\]\((\w+)\)")
         entity_text, entity_label = pattern.findall(match_text)[0]
 
-        text = text.replace(text[start_char:end_char], entity_text)    
+        text = text.replace(text[start_char:end_char], entity_text)
         entities = [{"start_char": start_char, "end_char": start_char+len(entity_text), "label": entity_label, "text": entity_text}]
     return text, entities
 
