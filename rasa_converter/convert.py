@@ -14,7 +14,8 @@ def extract_entities(text):
     entities = []
 
     # [entity-text](entity-label)
-    for match in re.finditer(r"\[([a-zA-Z ]+)\]\((\w+)\)", text):
+    match = re.search(r"\[([a-zA-Z ]+)\]\((\w+)\)", text)
+    while match:
         start_char, end_char = match.span()
         match_text = match.group(0)
 
@@ -22,9 +23,12 @@ def extract_entities(text):
 
         text = text.replace(match_text, entity_text)
         entities.append({"start_char": start_char, "end_char": start_char+len(entity_text), "label": entity_label, "text": entity_text})
+
+        match = re.search(r"\[([a-zA-Z ]+)\]\((\w+)\)", text)
     
     # [entity-text]{entity-dict}
-    for match in re.finditer(r"\[([a-zA-Z ]+)\](\{[a-z\:\", ]+\})", text):
+    match = re.search(r"\[([a-zA-Z ]+)\](\{[a-z\:\", ]+\})", text)
+    while match:
         start_char, end_char = match.span()
         match_text = match.group(0)
 
@@ -34,6 +38,9 @@ def extract_entities(text):
 
         text = text.replace(match_text, entity_text)
         entities.append({"start_char": start_char, "end_char": start_char+len(entity_text), "label": entity_label, "text": entity_text})
+
+        match = re.search(r"\[([a-zA-Z ]+)\](\{[a-z\:\", ]+\})", text)
+
     return text, entities
 
 def yield_data(input_path):
