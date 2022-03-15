@@ -23,13 +23,13 @@ def spacy_data():
     return get_data("spacy")
 
 def test_read_data_jsonl(jsonl_data):
-    assert len(jsonl_data) == 12
+    assert len(jsonl_data) == 15
 
 def test_read_data_csv(csv_data):
-    assert len(csv_data) == 12
+    assert len(csv_data) == 15
 
 def test_read_data_spacy(spacy_data):
-    assert len(spacy_data) == 12
+    assert len(spacy_data) == 15
 
 def test_write_data_jsonl(jsonl_data, tmp_path):
     output_path = tmp_path / "data.jsonl"
@@ -37,7 +37,7 @@ def test_write_data_jsonl(jsonl_data, tmp_path):
     assert os.path.exists(output_path)    
 
     data = read_data(output_path, format=".jsonl")
-    assert len(data) == 12
+    assert len(data) == 15
 
 def test_write_data_csv(csv_data, tmp_path):
     format = "csv"
@@ -46,7 +46,7 @@ def test_write_data_csv(csv_data, tmp_path):
     assert os.path.exists(output_path)    
 
     data = read_data(output_path, format=f".{format}")
-    assert len(data) == 12
+    assert len(data) == 15
 
 def test_write_data_spacy(spacy_data, tmp_path):
     format = "spacy"
@@ -55,4 +55,4 @@ def test_write_data_spacy(spacy_data, tmp_path):
     assert os.path.exists(output_path)    
 
     data = read_data(output_path, format=f".{format}")
-    assert len(data) == 12
+    assert len(data) == 15

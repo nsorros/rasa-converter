@@ -39,7 +39,7 @@ def test_convert(tmp_path):
     assert os.path.exists(output_path)
 
     data = read_jsonl(output_path)
-    assert len(data) == 12
+    assert len(data) == 15
 
 def test_convert_spacy(tmp_path):
     input_path = os.path.join(os.path.dirname(__file__), "data/")
@@ -48,7 +48,7 @@ def test_convert_spacy(tmp_path):
     assert os.path.exists(output_path)
 
     docs = read_spacy(output_path)
-    assert len(list(docs)) == 12
+    assert len(list(docs)) == 15
 
 def test_convert_csv(tmp_path):
     input_path = os.path.join(os.path.dirname(__file__), "data/")
@@ -57,4 +57,37 @@ def test_convert_csv(tmp_path):
     assert os.path.exists(output_path)
 
     docs = read_csv(output_path)
-    assert len(list(docs)) == 12
+    assert len(list(docs)) == 15
+
+def test_convert_multiple_entities(tmp_path):
+    input_path = os.path.join(os.path.dirname(__file__), "data/")
+    output_path = tmp_path / "data.jsonl"
+    convert(input_path, output_path)
+
+    data = read_jsonl(output_path)
+    assert max([len(example["entities"]) for example in data]) == 2
+
+def test_convert_spans(tmp_path):
+    input_path = os.path.join(os.path.dirname(__file__), "data/")
+    output_path = tmp_path / "data.jsonl"
+    convert(input_path, output_path)
+
+    data = read_jsonl(output_path)
+   
+    # Find example with 2 entities
+    for example in data:
+        if len(example["entities"]) == 2:
+            break
+    text = example["text"]
+    entities = example["entities"]
+    assert text[entities[0]["start_char"]:entities[0]["end_char"]]=="tennis"
+    assert text[entities[1]["start_char"]:entities[1]["end_char"]]=="soccer"
+
+def test_convert_entities(tmp_path):
+    input_path = os.path.join(os.path.dirname(__file__), "data/")
+    output_path = tmp_path / "data.jsonl"
+    convert(input_path, output_path)
+
+    data = read_jsonl(output_path)
+    examples_with_entities = [example for example in data if example["entities"]]
+    assert len(examples_with_entities) == 6

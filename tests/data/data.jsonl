@@ -10,3 +10,6 @@
 {"text": "where do you live?", "intent": "address", "entities": []}
 {"text": "do you also live in Greece", "intent": "address", "entities": [{"start_char": 20, "end_char": 26, "label": "country", "text": "Greece"}]}
 {"text": "did you say you are located in Cyprus", "intent": "address", "entities": [{"start_char": 31, "end_char": 37, "label": "country", "text": "Cyprus"}]}
+{"text": "what are your hobbies??", "intent": "hobbies", "entities": []}
+{"text": "do you play tennis or soccer?", "intent": "hobbies", "entities": [{"start_char": 12, "end_char": 18, "label": "hobby", "text": "tennis"}, {"start_char": 22, "end_char": 28, "label": "hobby", "text": "soccer"}]}
+{"text": "are you into fishing?", "intent": "hobbies", "entities": [{"start_char": 13, "end_char": 20, "label": "hobby", "text": "fishing"}]}
