@@ -13,34 +13,26 @@ app = typer.Typer()
 def extract_entities(text):
     entities = []
 
-    # [entity-text](entity-label)
-    match = re.search(r"\[([a-zA-Z ]+)\]\((\w+)\)", text)
+    # [entity-text](entity-label) or {entity-dict}
+    pattern = r"\[([a-zA-Z ]+)\]\((\w+)\)|\[([a-zA-Z ]+)\](\{[a-z\:\", ]+\})"
+
+    match = re.search(pattern, text)
     while match:
         start_char, end_char = match.span()
         match_text = match.group(0)
 
-        entity_text, entity_label = match.group(1), match.group(2)
+        if match.group(1):
+            entity_text, entity_label = match.group(1), match.group(2)
+        elif match.group(3):
+            entity_text = match.group(3)
+            entity_data = ast.literal_eval(match.group(4))
+            entity_label = entity_data["entity"]
 
         text = text.replace(match_text, entity_text)
         entities.append({"start_char": start_char, "end_char": start_char+len(entity_text), "label": entity_label, "text": entity_text})
 
-        match = re.search(r"\[([a-zA-Z ]+)\]\((\w+)\)", text)
+        match = re.search(pattern, text)
     
-    # [entity-text]{entity-dict}
-    match = re.search(r"\[([a-zA-Z ]+)\](\{[a-z\:\", ]+\})", text)
-    while match:
-        start_char, end_char = match.span()
-        match_text = match.group(0)
-
-        entity_text = match.group(1)
-        entity_data = ast.literal_eval(match.group(2))
-        entity_label = entity_data["entity"]
-
-        text = text.replace(match_text, entity_text)
-        entities.append({"start_char": start_char, "end_char": start_char+len(entity_text), "label": entity_label, "text": entity_text})
-
-        match = re.search(r"\[([a-zA-Z ]+)\](\{[a-z\:\", ]+\})", text)
-
     return text, entities
 
 def yield_data(input_path):
