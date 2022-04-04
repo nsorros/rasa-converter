@@ -11,3 +11,6 @@ you said you name was?,name
 where do you live?,address
 do you also live in Greece,address
 did you say you are located in Cyprus,address
+what are your hobbies??,hobbies
+do you play tennis or soccer?,hobbies
+are you into fishing?,hobbies

@@ -7,8 +7,8 @@ nlu:
   - intent: how_are_you
     examples: |
       - how are you?
-      - how are you [Nick](name)?
-      - how is your day [Matt](name)?
+      - how are you [Nick Sorros](name)?
+      - how is your day [Matt Upson](name)?
   - intent: name
     examples: |
       - what is your name?
@@ -19,3 +19,8 @@ nlu:
      - where do you live?
      - do you also live in [Greece](country)
      - did you say you are located in [Cyprus](country)
+  - intent: hobbies
+    examples: |
+     - what are your hobbies??
+     - do you play [tennis](hobby) or [soccer](hobby)?
+     - are you into [fishing]{"entity": "hobby"}?
