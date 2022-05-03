@@ -21,16 +21,17 @@ def extract_entities(text):
     while match:
         start_char, end_char = match.span()
         match_text = match.group(0)
-
+        
         if match.group(1):
             entity_text, entity_label = match.group(1), match.group(2)
+            entity_data = None
         elif match.group(3):
             entity_text = match.group(3)
             entity_data = ast.literal_eval(match.group(4))
             entity_label = entity_data["entity"]
 
         text = text.replace(match_text, entity_text)
-        entities.append({"start_char": start_char, "end_char": start_char+len(entity_text), "label": entity_label, "text": entity_text})
+        entities.append({"start_char": start_char, "end_char": start_char+len(entity_text), "label": entity_label, "text": entity_text, "additional_data": entity_data})
 
         match = re.search(pattern, text)
     
