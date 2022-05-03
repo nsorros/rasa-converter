@@ -25,8 +25,8 @@ python -m venv venv
 source venv/bin/activate
 
 git clone https://www.github.com/nsorros/rasa-converter
-cd rasa_converter
-pip install .[spacy,sklearn]
+cd rasa-converter
+pip install ".[spacy,sklearn]"
 ```
 
 # ▶️ Quickstart
@@ -61,8 +61,8 @@ python -m venv venv
 source venv/bin/activate
 
 git clone https://www.github.com/nsorros/rasa-converter
-cd rasa_converter
-pip install -e .[spacy,sklearn,test]
+cd rasa-converter
+pip install -e ".[spacy,sklearn,test]"
 ```
 
 To run tests run `pytest` or even better `tox`
